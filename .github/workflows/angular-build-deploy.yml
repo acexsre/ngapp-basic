@@ -23,12 +23,20 @@ jobs:
 
     - name: Build Angular app
       run: npm run build --prod
+    - name: List the dirs of the repo 
+      run: "ls -al"
+    - name: List the dirs of the dist
+      run: "ls -al ./dist/"
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
 
     steps:
+    - name: List the dirs of the repo 
+      run: "ls -al"
+    - name: List the dirs of the dist
+      run: "ls -al ./dist/"
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
@@ -37,4 +45,4 @@ jobs:
         aws-region: us-east-1  # Change this to your desired AWS region
 
     - name: Upload to S3
-      run: aws s3 sync dist/mufli-frontend/browser/* s3://dev-mufli-itsayushs/
+      run: aws s3 sync ./dist/mufli-frontend/browser/* s3://dev-mufli-itsayushs/
