@@ -23,18 +23,26 @@ jobs:
 
     - name: Build Angular app
       run: npm run build --prod
-    - name: List the dirs of the repo 
-      run: "ls -al"
+
     - name: List the dirs of the dist
       run: "ls -al ./dist/"
+    
+    - name: Archive dist folder
+      uses: actions/upload-artifact@v2
+      with:
+        name: dist
+        path: ./dist/mufli-frontend/browser
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
-
     steps:
-    - name: List the dirs of the repo 
-      run: "ls -al"
+
+    - name: Download artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: dist
+        path: dist
     - name: List the dirs of the dist
       run: "ls -al ./dist/"
     - name: Configure AWS credentials
@@ -45,4 +53,4 @@ jobs:
         aws-region: us-east-1  # Change this to your desired AWS region
 
     - name: Upload to S3
-      run: aws s3 sync ./dist/mufli-frontend/browser/* s3://dev-mufli-itsayushs/
+      run: aws s3 sync ./dist/* s3://dev-mufli-itsayushs/
