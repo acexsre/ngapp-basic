@@ -9,6 +9,7 @@ import { HealthcheckService } from '../services/healthcheck.service';
 })
 export class HealthcheckComponent {
   data: any;
+  state: any;
   constructor(private healthCheckService:HealthcheckService){}
   ngOnInit(){
     this.getData();
@@ -17,7 +18,8 @@ export class HealthcheckComponent {
     this.healthCheckService.getData().subscribe(
       (response) => {
         this.data = response;
-        console.log(this.data['data'])
+        console.log(this.data)
+        this.state = this.data['data']['color']
       },
       (error) => {
         console.error('Error fetching data:', error);
