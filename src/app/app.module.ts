@@ -12,6 +12,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import { HealthcheckComponent } from './healthcheck/healthcheck.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import {MatButtonModule} from '@angular/material/button';
     HomeComponent,
     RoomserviceComponent,
     UpselladdonsComponent,
-    NavbarComponent
+    NavbarComponent,
+    HealthcheckComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,8 @@ import {MatButtonModule} from '@angular/material/button';
     MatToolbarModule,
     MatListModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    HttpClientModule
   ],
   providers: [
     provideClientHydration()
